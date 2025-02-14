@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import LocationInput from '../components/LocationInput';
 import FilterBar from '../components/FilterBar';
@@ -24,7 +23,7 @@ const Index = () => {
         .rpc('find_nearby_stations', {
           lat: coordinates.lat,
           lng: coordinates.lng,
-          radius_km: 5
+          radius_km: 250 // Increased radius to cover Kerala's area
         });
 
       if (error) {
@@ -49,9 +48,8 @@ const Index = () => {
     });
     
     try {
-      // Use a geocoding service here
-      // For now, we'll use dummy coordinates
-      setCoordinates({ lat: 51.5074, lng: -0.1278 }); // London coordinates
+      // Use Kerala's approximate center coordinates
+      setCoordinates({ lat: 10.8505, lng: 76.2711 }); // Kerala's center coordinates
     } catch (error) {
       toast({
         variant: "destructive",
@@ -99,7 +97,7 @@ const Index = () => {
       <div className="max-w-2xl mx-auto space-y-6">
         <div className="text-center space-y-4 mb-8">
           <h1 className="text-4xl font-bold text-gray-900">Find Nearby Stations</h1>
-          <p className="text-gray-600">Discover the best prices for fuel and charging stations near you</p>
+          <p className="text-gray-600">Discover the best prices for fuel and charging stations in Kerala</p>
         </div>
 
         <LocationInput
@@ -115,7 +113,7 @@ const Index = () => {
         {isLoading ? (
           <div className="text-center py-8">
             <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full mx-auto"></div>
-            <p className="mt-4 text-gray-600">Finding stations near you...</p>
+            <p className="mt-4 text-gray-600">Finding stations in Kerala...</p>
           </div>
         ) : (
           <div className="space-y-4">
