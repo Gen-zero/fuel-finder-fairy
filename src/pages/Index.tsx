@@ -1,7 +1,9 @@
+
 import React, { useState } from 'react';
 import LocationInput from '../components/LocationInput';
 import FilterBar from '../components/FilterBar';
 import StationCard from '../components/StationCard';
+import Map from '../components/Map';
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from '@tanstack/react-query';
@@ -94,11 +96,13 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white p-6">
-      <div className="max-w-2xl mx-auto space-y-6">
+      <div className="max-w-4xl mx-auto space-y-6">
         <div className="text-center space-y-4 mb-8">
           <h1 className="text-4xl font-bold text-gray-900">Find Nearby Stations</h1>
           <p className="text-gray-600">Discover the best prices for fuel and charging stations in Kerala</p>
         </div>
+
+        <Map />
 
         <LocationInput
           onLocationSubmit={handleLocationSubmit}
