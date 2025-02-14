@@ -4,46 +4,61 @@ import LocationInput from '../components/LocationInput';
 import FilterBar from '../components/FilterBar';
 import StationCard from '../components/StationCard';
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { useQuery } from '@tanstack/react-query';
+import type { Database } from '@/integrations/supabase/types';
 
-// Dummy data for demonstration
-const MOCK_STATIONS = [
-  {
-    id: 1,
-    name: "Shell Station",
-    distance: "0.3 miles",
-    price: 3.99,
-    type: "fuel" as const,
-    address: "123 Main St, City, State"
-  },
-  {
-    id: 2,
-    name: "Tesla Supercharger",
-    distance: "0.5 miles",
-    price: 0.40,
-    type: "electric" as const,
-    address: "456 Electric Ave, City, State"
-  },
-  {
-    id: 3,
-    name: "Chevron",
-    distance: "0.7 miles",
-    price: 3.89,
-    type: "fuel" as const,
-    address: "789 Gas Lane, City, State"
-  },
-];
+type Station = Database['public']['Functions']['find_nearby_stations']['Returns'][0];
 
 const Index = () => {
   const { toast } = useToast();
   const [filter, setFilter] = useState<'all' | 'fuel' | 'electric'>('all');
-  const [stations, setStations] = useState(MOCK_STATIONS);
+  const [coordinates, setCoordinates] = useState<{ lat: number; lng: number } | null>(null);
 
-  const handleLocationSubmit = (location: string) => {
+  const { data: stations = [], isLoading } = useQuery({
+    queryKey: ['stations', coordinates?.lat, coordinates?.lng, filter],
+    queryFn: async () => {
+      if (!coordinates) return [];
+      
+      const { data, error } = await supabase
+        .rpc('find_nearby_stations', {
+          lat: coordinates.lat,
+          lng: coordinates.lng,
+          radius_km: 5
+        });
+
+      if (error) {
+        console.error('Error fetching stations:', error);
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "Failed to fetch nearby stations",
+        });
+        return [];
+      }
+
+      return data as Station[];
+    },
+    enabled: !!coordinates,
+  });
+
+  const handleLocationSubmit = async (location: string) => {
     toast({
-      title: "Location updated",
+      title: "Location update",
       description: `Searching for stations near ${location}`,
     });
-    // In a real app, this would fetch stations based on the location
+    
+    try {
+      // Use a geocoding service here
+      // For now, we'll use dummy coordinates
+      setCoordinates({ lat: 51.5074, lng: -0.1278 }); // London coordinates
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Unable to find location",
+      });
+    }
   };
 
   const handleUseCurrentLocation = () => {
@@ -51,14 +66,18 @@ const Index = () => {
       title: "Accessing location",
       description: "Finding your current location...",
     });
+
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
+          setCoordinates({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          });
           toast({
             title: "Location found",
             description: "Searching for nearby stations...",
           });
-          // In a real app, this would fetch stations based on coordinates
         },
         () => {
           toast({
@@ -93,18 +112,35 @@ const Index = () => {
           onFilterChange={setFilter}
         />
 
-        <div className="space-y-4">
-          {filteredStations.map((station) => (
-            <StationCard
-              key={station.id}
-              name={station.name}
-              distance={station.distance}
-              price={station.price}
-              type={station.type}
-              address={station.address}
-            />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="text-center py-8">
+            <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full mx-auto"></div>
+            <p className="mt-4 text-gray-600">Finding stations near you...</p>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {filteredStations.map((station) => (
+              <StationCard
+                key={station.id}
+                name={station.name}
+                distance={`${station.distance.toFixed(1)} km`}
+                price={station.latest_price || 0}
+                type={station.type}
+                address={station.address}
+              />
+            ))}
+            {filteredStations.length === 0 && coordinates && (
+              <div className="text-center py-8">
+                <p className="text-gray-600">No stations found in this area</p>
+              </div>
+            )}
+            {!coordinates && (
+              <div className="text-center py-8">
+                <p className="text-gray-600">Enter a location or use your current location to find stations</p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

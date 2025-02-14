@@ -35,9 +35,15 @@ const StationCard = ({ name, distance, price, type, address }: StationCardProps)
         </div>
         <div className="text-right">
           <div className="text-lg font-bold text-gray-900">
-            ${price.toFixed(2)}
+            {price ? (
+              `$${price.toFixed(2)}`
+            ) : (
+              <span className="text-gray-400">N/A</span>
+            )}
           </div>
-          <div className="text-sm text-gray-500">per gallon</div>
+          <div className="text-sm text-gray-500">
+            {type === 'fuel' ? 'per gallon' : 'per kWh'}
+          </div>
         </div>
       </div>
       <p className="mt-2 text-sm text-gray-600">{address}</p>

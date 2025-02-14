@@ -9,16 +9,91 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      prices: {
+        Row: {
+          created_at: string
+          id: string
+          price: number
+          station_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          price: number
+          station_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          price?: number
+          station_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prices_station_id_fkey"
+            columns: ["station_id"]
+            isOneToOne: false
+            referencedRelation: "stations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      stations: {
+        Row: {
+          address: string
+          created_at: string
+          id: string
+          latitude: number
+          longitude: number
+          name: string
+          type: Database["public"]["Enums"]["station_type"]
+          updated_at: string
+        }
+        Insert: {
+          address: string
+          created_at?: string
+          id?: string
+          latitude: number
+          longitude: number
+          name: string
+          type: Database["public"]["Enums"]["station_type"]
+          updated_at?: string
+        }
+        Update: {
+          address?: string
+          created_at?: string
+          id?: string
+          latitude?: number
+          longitude?: number
+          name?: string
+          type?: Database["public"]["Enums"]["station_type"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      find_nearby_stations: {
+        Args: {
+          lat: number
+          lng: number
+          radius_km?: number
+        }
+        Returns: {
+          id: string
+          name: string
+          address: string
+          distance: number
+          type: Database["public"]["Enums"]["station_type"]
+          latest_price: number
+        }[]
+      }
     }
     Enums: {
-      [_ in never]: never
+      station_type: "fuel" | "electric"
     }
     CompositeTypes: {
       [_ in never]: never
