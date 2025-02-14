@@ -91,6 +91,18 @@ export type Database = {
           latest_price: number
         }[]
       }
+      get_stations_for_map: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          id: string
+          name: string
+          address: string
+          latitude: number
+          longitude: number
+          type: Database["public"]["Enums"]["station_type"]
+          latest_price: number
+        }[]
+      }
     }
     Enums: {
       station_type: "fuel" | "electric"
