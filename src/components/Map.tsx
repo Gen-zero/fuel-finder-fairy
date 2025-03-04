@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { supabase } from "@/integrations/supabase/client";
@@ -11,17 +11,25 @@ const Map = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const markers = useRef<mapboxgl.Marker[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let isMounted = true;
 
     const fetchStations = async () => {
-      const { data: stations, error } = await supabase.rpc('get_stations_for_map');
-      if (error) {
-        console.error('Error fetching stations:', error);
-        return;
+      try {
+        const { data: stations, error } = await supabase.rpc('get_stations_for_map');
+        if (error) {
+          console.error('Error fetching stations:', error);
+          throw error;
+        }
+        return stations;
+      } catch (err) {
+        console.error('Failed to fetch stations:', err);
+        if (isMounted) setError('Failed to load station data');
+        return null;
       }
-      return stations;
     };
 
     const initializeMap = async () => {
@@ -29,8 +37,17 @@ const Map = () => {
 
       try {
         const { data: { MAPBOX_TOKEN }, error } = await supabase.functions.invoke('get-mapbox-token');
+        
         if (error || !MAPBOX_TOKEN) {
           console.error('Error getting Mapbox token:', error);
+          if (isMounted) setError('Could not load map: Token error');
+          return;
+        }
+
+        // Verify this is a public token (should start with 'pk.')
+        if (!MAPBOX_TOKEN.startsWith('pk.')) {
+          console.error('Invalid Mapbox token: Must be a public token');
+          if (isMounted) setError('Invalid Mapbox token type. Must use a public token (pk.*)');
           return;
         }
 
@@ -48,7 +65,8 @@ const Map = () => {
         // Wait for map to load before adding features
         newMap.on('load', async () => {
           if (!isMounted) return;
-
+          
+          if (isMounted) setLoading(false);
           map.current = newMap;
 
           // Add navigation controls
@@ -89,11 +107,23 @@ const Map = () => {
             markers.current.push(marker);
           });
         });
-      } catch (error) {
-        console.error('Error initializing map:', error);
+
+        // Handle load error
+        newMap.on('error', (e) => {
+          console.error('Mapbox error:', e);
+          if (isMounted) setError('Error loading map');
+        });
+
+      } catch (err) {
+        console.error('Error initializing map:', err);
+        if (isMounted) {
+          setLoading(false);
+          setError('Failed to initialize map');
+        }
       }
     };
 
+    setLoading(true);
     initializeMap();
 
     return () => {
@@ -109,6 +139,21 @@ const Map = () => {
 
   return (
     <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-10">
+          <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full"></div>
+        </div>
+      )}
+      
+      {error && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-10">
+          <div className="text-center p-4">
+            <p className="text-destructive font-medium">{error}</p>
+            <p className="text-sm text-gray-500 mt-2">Please check your Mapbox token configuration.</p>
+          </div>
+        </div>
+      )}
+      
       <div ref={mapContainer} className="absolute inset-0" />
     </div>
   );

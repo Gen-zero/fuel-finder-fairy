@@ -14,6 +14,15 @@ serve(async (req: Request) => {
   try {
     const MAPBOX_TOKEN = Deno.env.get('MAPBOX_TOKEN')
     
+    if (!MAPBOX_TOKEN) {
+      throw new Error('MAPBOX_TOKEN is not set in environment variables')
+    }
+    
+    // Verify this is a public token (should start with 'pk.')
+    if (!MAPBOX_TOKEN.startsWith('pk.')) {
+      throw new Error('Invalid Mapbox token: Must be a public token (pk.*)')
+    }
+    
     return new Response(
       JSON.stringify({ MAPBOX_TOKEN }),
       {
@@ -22,6 +31,8 @@ serve(async (req: Request) => {
       },
     )
   } catch (error) {
+    console.error('Error in get-mapbox-token function:', error)
+    
     return new Response(
       JSON.stringify({ error: error.message }),
       {
