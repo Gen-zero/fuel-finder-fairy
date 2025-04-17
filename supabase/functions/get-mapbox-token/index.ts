@@ -24,7 +24,7 @@ serve(async (req: Request) => {
     }
     
     return new Response(
-      JSON.stringify({ MAPBOX_TOKEN }),
+      JSON.stringify({ token: MAPBOX_TOKEN }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 200,

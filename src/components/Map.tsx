@@ -36,13 +36,15 @@ const Map = () => {
       if (!mapContainer.current || map.current) return;
 
       try {
-        const { data: { MAPBOX_TOKEN }, error } = await supabase.functions.invoke('get-mapbox-token');
+        const { data, error } = await supabase.functions.invoke('get-mapbox-token');
         
-        if (error || !MAPBOX_TOKEN) {
-          console.error('Error getting Mapbox token:', error);
+        if (error || !data || !data.token) {
+          console.error('Error getting Mapbox token:', error || 'No token in response');
           if (isMounted) setError('Could not load map: Token error');
           return;
         }
+
+        const MAPBOX_TOKEN = data.token;
 
         // Verify this is a public token (should start with 'pk.')
         if (!MAPBOX_TOKEN.startsWith('pk.')) {
