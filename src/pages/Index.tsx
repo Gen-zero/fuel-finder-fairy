@@ -21,7 +21,7 @@ type Station = {
 
 const Index = () => {
   const { toast } = useToast();
-  const [filter, setFilter] = useState<'all' | 'fuel' | 'electric'>('all');
+  const [filter, setFilter] = useState<'all' | 'fuel' | 'electric'>('fuel');
   const [coordinates, setCoordinates] = useState<{ lat: number; lng: number } | null>(null);
 
   const { data: stations = [], isLoading } = useQuery({
@@ -110,7 +110,7 @@ const Index = () => {
           <p className="text-gray-600">Discover the best prices for fuel and charging stations in Kerala</p>
         </div>
 
-        <Map />
+        <Map activeFilter={filter} />
 
         <LocationInput
           onLocationSubmit={handleLocationSubmit}
