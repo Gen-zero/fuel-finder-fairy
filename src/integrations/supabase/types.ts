@@ -14,13 +14,95 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      prices: {
+        Row: {
+          created_at: string
+          id: string
+          price: number
+          station_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          price: number
+          station_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          price?: number
+          station_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prices_station_id_fkey"
+            columns: ["station_id"]
+            isOneToOne: false
+            referencedRelation: "stations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      stations: {
+        Row: {
+          address: string
+          created_at: string
+          id: string
+          latitude: number
+          longitude: number
+          name: string
+          type: string
+        }
+        Insert: {
+          address: string
+          created_at?: string
+          id?: string
+          latitude: number
+          longitude: number
+          name: string
+          type: string
+        }
+        Update: {
+          address?: string
+          created_at?: string
+          id?: string
+          latitude?: number
+          longitude?: number
+          name?: string
+          type?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      find_nearby_stations: {
+        Args: { lat: number; lng: number; radius_km?: number }
+        Returns: {
+          id: string
+          name: string
+          address: string
+          latitude: number
+          longitude: number
+          type: string
+          distance: number
+          latest_price: number
+        }[]
+      }
+      get_stations_for_map: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          id: string
+          name: string
+          address: string
+          latitude: number
+          longitude: number
+          type: string
+          latest_price: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
