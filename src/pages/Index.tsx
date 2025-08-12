@@ -7,9 +7,17 @@ import Map from '../components/Map';
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from '@tanstack/react-query';
-import type { Database } from '@/integrations/supabase/types';
-
-type Station = Database['public']['Functions']['find_nearby_stations']['Returns'][0];
+// Local Station type to avoid dependency on generated Supabase types
+type Station = {
+  id: string;
+  name: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+  type: 'fuel' | 'electric';
+  distance: number;
+  latest_price: number | null;
+};
 
 const Index = () => {
   const { toast } = useToast();

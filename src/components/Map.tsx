@@ -3,9 +3,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { supabase } from "@/integrations/supabase/client";
-import type { Database } from '@/integrations/supabase/types';
-
-type Station = Database['public']['Functions']['get_stations_for_map']['Returns'][0];
+type Station = {
+  id: string;
+  name: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+  type: 'fuel' | 'electric';
+  latest_price: number | null;
+};
 
 const Map = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
