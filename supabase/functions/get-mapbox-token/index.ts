@@ -12,10 +12,10 @@ serve(async (req: Request) => {
   }
 
   try {
-    const MAPBOX_TOKEN = Deno.env.get('MAPBOX_TOKEN')
+    const MAPBOX_TOKEN = Deno.env.get('MAPBOX_PUBLIC_TOKEN') || Deno.env.get('MAPBOX_TOKEN')
     
     if (!MAPBOX_TOKEN) {
-      throw new Error('MAPBOX_TOKEN is not set in environment variables')
+      throw new Error('MAPBOX_PUBLIC_TOKEN is not set in Supabase Edge Function secrets')
     }
     
     // Verify this is a public token (should start with 'pk.')
