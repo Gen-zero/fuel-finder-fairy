@@ -1,0 +1,307 @@
+[
+  {
+    "Station Name": "JioBP Kochi Station",
+    "Location": "31/696, Sahodaran Ayyappan Rd, Thykoodam, Vyttila, Poonithura, Ernakulam, Kerala 682019, India",
+    "Coordinates": "9.9312, 76.2673"
+  },
+  {
+    "Station Name": "JioBP Thiruvananthapuram Station",
+    "Location": "Thiruvananthapuram",
+    "Coordinates": "8.5241, 76.9366"
+  },
+  {
+    "Station Name": "JioBP Kozhikode Station",
+    "Location": "Ground Floor, Karimbanappalam, Eranhipalam, Mini Bypass Rd, Kozhikode, Kerala 673006, India",
+    "Coordinates": "11.2588, 75.7804"
+  },
+  {
+    "Station Name": "JioBP Thrissur Station",
+    "Location": "Thrissur",
+    "Coordinates": "10.5276, 76.2144"
+  },
+  {
+    "Station Name": "JioBP Kollam Station",
+    "Location": "Kollam",
+    "Coordinates": "8.8932, 76.6142"
+  },
+  {
+    "Station Name": "JioBP Kannur Station",
+    "Location": "Ground Floor, Kannur Road, Kannur, Kerala",
+    "Coordinates": "11.8745, 75.3704"
+  },
+  {
+    "Station Name": "JioBP Palakkad Station",
+    "Location": "Ground Floor, Calicut Bypass Road, Kalmandapam, Palakkad - 678001",
+    "Coordinates": "10.7867, 76.6548"
+  },
+  {
+    "Station Name": "JioBP Kottayam Station",
+    "Location": "No 3/394 A, Ponkunnam, KK Road Kanjrappally, Kottayam, Kerala - 686506",
+    "Coordinates": "9.5916, 76.5222"
+  },
+  {
+    "Station Name": "JioBP Alappuzha Station",
+    "Location": "Alappuzha",
+    "Coordinates": "9.4981, 76.3388"
+  },
+  {
+    "Station Name": "JioBP Kasaragod Station",
+    "Location": "Kasaragod, Kerala, India",
+    "Coordinates": "12.5000, 74.9960"
+  },
+  {
+    "Station Name": "JioBP Malappuram Station",
+    "Location": "Aminas Petroleum, No 168/3, Iruvetti, Kavanur, Chengara, Malappuram - 673639, Near Chengara Juma Masjid",
+    "Coordinates": "11.0583, 76.0800"
+  },
+  {
+    "Station Name": "JioBP Wayanad Station",
+    "Location": "Wayanad, Kerala, India",
+    "Coordinates": "11.6550, 76.1000"
+  },
+  {
+    "Station Name": "JioBP Idukki Station",
+    "Location": "Ground Floor, Thodupuzha, Vengalloor, Idukki - 685684",
+    "Coordinates": "10.0910, 77.0590"
+  },
+  {
+    "Station Name": "JioBP Pathanamthitta Station",
+    "Location": "Pathanamthitta",
+    "Coordinates": "9.2642, 76.7878"
+  },
+  {
+    "Station Name": "JioBP Muvattupuzha Station",
+    "Location": "Sy No 713/3C & 713/3/C1, Velloorkkunnam, Muvattupuzha, Kerala, 686669, India",
+    "Coordinates": "10.0546, 76.5297"
+  },
+  {
+    "Station Name": "JioBP Kothamangalam Station",
+    "Location": "Ground Floor, Kothamangalam Byp, opposite Municipal Mini Bus Stand, Thankalam, Kothamangalam, Kerala 686691, India",
+    "Coordinates": "10.1490, 76.6800"
+  },
+  {
+    "Station Name": "JioBP Nilambur Station",
+    "Location": "Ground Floor, Aruvakode, Kodathipadi, Nilambur, Nilambur - 679329, Kerala, India",
+    "Coordinates": "11.2701, 76.2790"
+  },
+  {
+    "Station Name": "JioBP Varkala Station",
+    "Location": "Varkala, Kerala, India",
+    "Coordinates": "8.7300, 76.7000"
+  },
+  {
+    "Station Name": "JioBP Aluva Station",
+    "Location": "Aluva, Kerala, India",
+    "Coordinates": "10.1089, 76.3650"
+  },
+  {
+    "Station Name": "JioBP Payyanur Station",
+    "Location": "Ground Floor, Pandakkal, Mahe, Kozhikode - 673310",
+    "Coordinates": "12.2200, 75.1970"
+  },
+  {
+    "Station Name": "JioBP Edappally Station",
+    "Location": "Edappally",
+    "Coordinates": "10.0333, 76.3622"
+  },
+  {
+    "Station Name": "JioBP North Paravur Station",
+    "Location": "JioBP North Paravur Station is located in North Paravur, Ernakulam, Kerala, India.",
+    "Coordinates": "10.1931, 76.2460"
+  },
+  {
+    "Station Name": "JioBP Thrikkakara Station",
+    "Location": "No 31/696, SA Road, Poonithura, Thykoodam, Vytilla, Ernakulam, Kerala",
+    "Coordinates": "10.0179, 76.3583"
+  },
+  {
+    "Station Name": "JioBP Perumbavoor Station",
+    "Location": "Survey No 8 & 9, 2456 & 10/3 & 5 & 39, SH 1, Perumbavoor, Kerala 683542, India",
+    "Coordinates": "10.1670, 76.4470"
+  },
+  {
+    "Station Name": "JioBP Vatakara Station",
+    "Location": "JioBP Vatakara Station is located in Kerala, India.",
+    "Coordinates": "11.5840, 75.6960"
+  },
+  {
+    "Station Name": "JioBP Changanassery Station",
+    "Location": "Ground Floor, Changanassery - Vazhoor Rd, near Parel Church, Parippally, Changanassery, Kottayam, Kerala 686104",
+    "Coordinates": "9.6450, 76.5250"
+  },
+  {
+    "Station Name": "JioBP Angamaly Station",
+    "Location": "Angamaly, Kerala, India",
+    "Coordinates": "10.1880, 76.4280"
+  },
+  {
+    "Station Name": "JioBP Ottappalam Station",
+    "Location": "JioBP Petrol Pump, Ottappalam, Kerala, India",
+    "Coordinates": "10.6400, 76.2700"
+  },
+  {
+    "Station Name": "JioBP Ponnani Station",
+    "Location": "Ponnani, Kerala, India",
+    "Coordinates": "10.7800, 75.9300"
+  },
+  {
+    "Station Name": "JioBP Munnar Station",
+    "Location": "Munnar, Kerala, India",
+    "Coordinates": "10.0885, 77.0585"
+  },
+  {
+    "Station Name": "JioBP Cherthala Station",
+    "Location": "Ground Floor, Thannirmokam Road, Near Woodlands Lodge, Kodathikavala, Cherthala, Kerala - 688524",
+    "Coordinates": "9.8660, 76.3300"
+  },
+  {
+    "Station Name": "JioBP Chavakkad Station",
+    "Location": "Thrissur Kunnamkulam Road, Kecheri, Thrissur - 680501",
+    "Coordinates": "10.6860, 76.1720"
+  },
+  {
+    "Station Name": "JioBP Kunnamkulam Station",
+    "Location": "Kunnamkulam, Thrissur, Kerala, India",
+    "Coordinates": "10.6410, 76.1800"
+  },
+  {
+    "Station Name": "JioBP Shoranur Station",
+    "Location": "Shoranur, Kerala, India",
+    "Coordinates": "10.8000, 76.0000"
+  },
+  {
+    "Station Name": "JioBP Manjeri Station",
+    "Location": "Meenchanda, Calicut, Kerala - 673018",
+    "Coordinates": "11.1000, 76.1500"
+  },
+  {
+    "Station Name": "JioBP Ernakulam South Station",
+    "Location": "No 31/696, SA Road, Poonithura, Thykoodam Vytilla, Ernakulam - 682019",
+    "Coordinates": "9.9750, 76.3000"
+  },
+  {
+    "Station Name": "JioBP Vazhakkala Station",
+    "Location": "Ground Floor, Seaport - Airport Rd, opposite Cochin, CSEZ, Kakkanad, Kochi, Kerala 682037, India",
+    "Coordinates": "9.9800, 76.3500"
+  },
+  {
+    "Station Name": "JioBP Irinjalakuda Station",
+    "Location": "Railway Station Road, Irinjalakuda, Thrissur - 680121",
+    "Coordinates": "10.3500, 76.4500"
+  },
+  {
+    "Station Name": "JioBP Mararikulam Station",
+    "Location": "Ground Floor, Mini Bypass Rd, Karimbanappalam, Eranhipalam, Kozhikode, Kerala, 673006",
+    "Coordinates": "9.8765, 76.5300"
+  },
+  {
+    "Station Name": "JioBP Piravom Station",
+    "Location": "JioBP Piravom Station, Ernakulam, Kerala, India",
+    "Coordinates": "10.0900, 76.5900"
+  },
+  {
+    "Station Name": "JioBP Vaikom Station",
+    "Location": "Ground Floor Vaikom, near Lic Building, North Junction, Naduvile, Kottayam, Kerala 686141, India",
+    "Coordinates": "9.9700, 76.5900"
+  },
+  {
+    "Station Name": "JioBP Kayamkulam Station",
+    "Location": "Ground Floor, Kayamkulam Punalur Road, Opp Kerala Agri Promotion Board Office, Kayamkulam, Kollam, Kerala - 691306",
+    "Coordinates": "9.1500, 76.4800"
+  },
+  {
+    "Station Name": "JioBP Guruvayur Station",
+    "Location": "Ground Floor, Guruvayoor Road, Puzhakkal Muthuvara, Thrissur, Kerala 680553",
+    "Coordinates": "10.5800, 76.2100"
+  },
+  {
+    "Station Name": "JioBP Njarackal Station",
+    "Location": "No 31/696, SA Road, Poonithura, Thykoodam, Vytilla, Ernakulam, Kerala",
+    "Coordinates": "9.9830, 76.2500"
+  },
+  {
+    "Station Name": "JioBP Thriprayar Station",
+    "Location": "Thriprayar, Kerala, India",
+    "Coordinates": "10.2833, 76.3500"
+  },
+  {
+    "Station Name": "JioBP Thalassery Station",
+    "Location": "Ground Floor, Pandakkal, Mahe, Kozhikode, Kerala - 673310",
+    "Coordinates": "11.1111, 75.4000"
+  },
+  {
+    "Station Name": "JioBP Chittur Station",
+    "Location": "Ground Floor, Lankeswaram, Chittur, Kerala 678101, India",
+    "Coordinates": "10.5500, 76.3667"
+  },
+  {
+    "Station Name": "JioBP Attingal Station",
+    "Location": "Attingal, Kerala, India",
+    "Coordinates": "8.5400, 76.9000"
+  },
+  {
+    "Station Name": "JioBP Cheruvally Station",
+    "Location": "Cheruvally, Kerala, India",
+    "Coordinates": "10.4500, 76.6500"
+  },
+  {
+    "Station Name": "JioBP Chennamangalam Station",
+    "Location": "Chennamangalam, Kerala, India",
+    "Coordinates": "10.2000, 76.7500"
+  },
+  {
+    "Station Name": "Jio-bp Puthiyangadi",
+    "Location": "Near Koya Road, Puthiyangadi, Kozhikode, Kerala, India",
+    "Coordinates": "11.301609, 75.762024"
+  },
+  {
+    "Station Name": "Indian Oil Petrol Pump, Thripunithara, Ernakulam District",
+    "Location": "Kodamkulangara, Ernakulam, Kerala, India",
+    "Coordinates": "9.2500, 76.5000"
+  },
+  {
+    "Station Name": "Fuel Station",
+    "Location": "Kerala, India",
+    "Coordinates": "10.2500, 76.4000"
+  },
+  {
+    "Station Name": "Bharat Petroleum Petrol Pump, VKV FUELS",
+    "Location": "Kerala",
+    "Coordinates": "11.0000, 75.9000"
+  },
+  {
+    "Station Name": "IndianOil S R Fuel Station",
+    "Location": "Chembuchira, Thrissur, Kerala, India",
+    "Coordinates": "10.5000, 76.8000"
+  },
+  {
+    "Station Name": "BPCL Petrol Pump",
+    "Location": "Alappuzha, Kerala",
+    "Coordinates": "9.8500, 76.6000"
+  },
+  {
+    "Station Name": "IndianOil S R Fuel Station",
+    "Location": "Ground Floor Pulippara, Manakulangara, Chembuchira, Kerala 680684, India",
+    "Coordinates": "10.7500, 76.1500"
+  },
+  {
+    "Station Name": "St.Thomas Fuel Station",
+    "Location": "Kerala, India",
+    "Coordinates": "11.3000, 76.0000"
+  },
+  {
+    "Station Name": "Baba Filling Station",
+    "Location": "Kerala, India",
+    "Coordinates": "10.0000, 76.5000"
+  },
+  {
+    "Station Name": "IndianOil S R Fuel Station",
+    "Location": "Ground Floor Pulippara, Manakulangara, Chembuchira, Kerala 680684, India",
+    "Coordinates": "9.7000, 76.4000"
+  },
+  {
+    "Station Name": "IndianOil",
+    "Location": "Ground Floor Pulippara, Manakulangara, Chembuchira, Kerala 680684, India",
+    "Coordinates": "10.4000, 76.2500"
+  }
+]
