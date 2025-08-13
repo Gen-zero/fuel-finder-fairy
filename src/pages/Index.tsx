@@ -4,6 +4,7 @@ import LocationInput from '../components/LocationInput';
 import FilterBar from '../components/FilterBar';
 import StationCard from '../components/StationCard';
 import Map from '../components/Map';
+import { ImportButton } from '../components/ImportButton';
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from '@tanstack/react-query';
@@ -117,10 +118,13 @@ const Index = () => {
           onUseCurrentLocation={handleUseCurrentLocation}
         />
 
-        <FilterBar
-          activeFilter={filter}
-          onFilterChange={setFilter}
-        />
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <FilterBar
+            activeFilter={filter}
+            onFilterChange={setFilter}
+          />
+          <ImportButton />
+        </div>
 
         {isLoading ? (
           <div className="text-center py-8">
