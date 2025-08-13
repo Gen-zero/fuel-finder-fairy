@@ -14,62 +14,101 @@ export type Database = {
   }
   public: {
     Tables: {
-      prices: {
+      daily_prices: {
         Row: {
-          created_at: string
-          id: string
-          price: number
-          station_id: string
+          as_of_date: string
+          confidence: number | null
+          created_at: string | null
+          currency: string | null
+          fuel_type: string
+          id: number
+          price: number | null
+          raw_payload: Json | null
+          source: string | null
+          station_id: string | null
+          unit: string | null
         }
         Insert: {
-          created_at?: string
-          id?: string
-          price: number
-          station_id: string
+          as_of_date: string
+          confidence?: number | null
+          created_at?: string | null
+          currency?: string | null
+          fuel_type: string
+          id?: number
+          price?: number | null
+          raw_payload?: Json | null
+          source?: string | null
+          station_id?: string | null
+          unit?: string | null
         }
         Update: {
-          created_at?: string
-          id?: string
-          price?: number
-          station_id?: string
+          as_of_date?: string
+          confidence?: number | null
+          created_at?: string | null
+          currency?: string | null
+          fuel_type?: string
+          id?: number
+          price?: number | null
+          raw_payload?: Json | null
+          source?: string | null
+          station_id?: string | null
+          unit?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "prices_station_id_fkey"
+            foreignKeyName: "daily_prices_station_id_fkey"
             columns: ["station_id"]
             isOneToOne: false
             referencedRelation: "stations"
-            referencedColumns: ["id"]
+            referencedColumns: ["station_id"]
           },
         ]
       }
       stations: {
         Row: {
-          address: string
-          created_at: string
-          id: string
-          latitude: number
-          longitude: number
-          name: string
-          type: string
+          address: string | null
+          city: string | null
+          created_at: string | null
+          lat: number | null
+          lng: number | null
+          meta: Json | null
+          name: string | null
+          provider: string | null
+          source: string
+          state: string | null
+          station_id: string
+          station_type: string
+          updated_at: string | null
         }
         Insert: {
-          address: string
-          created_at?: string
-          id?: string
-          latitude: number
-          longitude: number
-          name: string
-          type: string
+          address?: string | null
+          city?: string | null
+          created_at?: string | null
+          lat?: number | null
+          lng?: number | null
+          meta?: Json | null
+          name?: string | null
+          provider?: string | null
+          source: string
+          state?: string | null
+          station_id: string
+          station_type: string
+          updated_at?: string | null
         }
         Update: {
-          address?: string
-          created_at?: string
-          id?: string
-          latitude?: number
-          longitude?: number
-          name?: string
-          type?: string
+          address?: string | null
+          city?: string | null
+          created_at?: string | null
+          lat?: number | null
+          lng?: number | null
+          meta?: Json | null
+          name?: string | null
+          provider?: string | null
+          source?: string
+          state?: string | null
+          station_id?: string
+          station_type?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
