@@ -6,6 +6,8 @@ import StationCard from '../components/StationCard';
 import Map from '../components/Map';
 import { ImportButton } from '../components/ImportButton';
 import { useToast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from '@tanstack/react-query';
 // Local Station type to avoid dependency on generated Supabase types
@@ -24,6 +26,7 @@ const Index = () => {
   const { toast } = useToast();
   const [filter, setFilter] = useState<'all' | 'fuel' | 'electric'>('fuel');
   const [coordinates, setCoordinates] = useState<{ lat: number; lng: number } | null>(null);
+  const [showOverlay, setShowOverlay] = useState(true);
 
   const { data: stations = [], isLoading } = useQuery({
     queryKey: ['stations', coordinates?.lat, coordinates?.lng, filter],
@@ -157,58 +160,81 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white p-6">
-      <div className="max-w-4xl mx-auto space-y-6">
-        <div className="text-center space-y-4 mb-8">
-          <h1 className="text-4xl font-bold text-gray-900">Find Nearby Stations</h1>
-          <p className="text-gray-600">Discover the best prices for fuel and charging stations in Kerala</p>
-        </div>
+    <div className="relative w-full h-screen overflow-hidden">
+      {/* Full-screen Map Background */}
+      <Map activeFilter={filter} />
+      
+      {/* Toggle Button */}
+      <Button
+        onClick={() => setShowOverlay(!showOverlay)}
+        className="fixed top-4 right-4 z-50 rounded-full w-12 h-12 p-0 bg-white/90 hover:bg-white text-gray-900 shadow-lg border"
+        variant="ghost"
+      >
+        {showOverlay ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+      </Button>
 
-        <Map activeFilter={filter} />
+      {/* Overlay Panel */}
+      {showOverlay && (
+        <div className="fixed inset-0 z-40 pointer-events-none">
+          <div className="absolute left-4 top-4 bottom-4 w-96 max-w-[calc(100vw-2rem)] pointer-events-auto">
+            <div className="h-full bg-white/95 backdrop-blur-sm rounded-lg shadow-xl border overflow-y-auto">
+              <div className="p-6 space-y-6">
+                {/* Header */}
+                <div className="text-center space-y-2">
+                  <h1 className="text-2xl font-bold text-gray-900">Find Nearby Stations</h1>
+                  <p className="text-sm text-gray-600">Discover the best prices for fuel and charging stations</p>
+                </div>
 
-        <LocationInput
-          onLocationSubmit={handleLocationSubmit}
-          onUseCurrentLocation={handleUseCurrentLocation}
-        />
+                {/* Location Input */}
+                <LocationInput
+                  onLocationSubmit={handleLocationSubmit}
+                  onUseCurrentLocation={handleUseCurrentLocation}
+                />
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <FilterBar
-            activeFilter={filter}
-            onFilterChange={setFilter}
-          />
-          <ImportButton />
-        </div>
+                {/* Filter and Import */}
+                <div className="flex flex-col gap-4">
+                  <FilterBar
+                    activeFilter={filter}
+                    onFilterChange={setFilter}
+                  />
+                  <ImportButton />
+                </div>
 
-        {isLoading ? (
-          <div className="text-center py-8">
-            <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full mx-auto"></div>
-            <p className="mt-4 text-gray-600">Finding stations in Kerala...</p>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {filteredStations.map((station) => (
-              <StationCard
-                key={station.id}
-                name={station.name}
-                distance={`${station.distance.toFixed(1)} km`}
-                price={station.latest_price || 0}
-                type={station.type}
-                address={station.address}
-              />
-            ))}
-            {filteredStations.length === 0 && coordinates && (
-              <div className="text-center py-8">
-                <p className="text-gray-600">No stations found in this area</p>
+                {/* Results */}
+                {isLoading ? (
+                  <div className="text-center py-8">
+                    <div className="animate-spin h-6 w-6 border-4 border-primary border-t-transparent rounded-full mx-auto"></div>
+                    <p className="mt-4 text-sm text-gray-600">Finding stations...</p>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {filteredStations.map((station) => (
+                      <StationCard
+                        key={station.id}
+                        name={station.name}
+                        distance={`${station.distance.toFixed(1)} km`}
+                        price={station.latest_price || 0}
+                        type={station.type}
+                        address={station.address}
+                      />
+                    ))}
+                    {filteredStations.length === 0 && coordinates && (
+                      <div className="text-center py-6">
+                        <p className="text-sm text-gray-600">No stations found in this area</p>
+                      </div>
+                    )}
+                    {!coordinates && (
+                      <div className="text-center py-6">
+                        <p className="text-sm text-gray-600">Enter a location to find stations</p>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
-            )}
-            {!coordinates && (
-              <div className="text-center py-8">
-                <p className="text-gray-600">Enter a location or use your current location to find stations</p>
-              </div>
-            )}
+            </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

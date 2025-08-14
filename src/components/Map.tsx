@@ -181,23 +181,23 @@ const Map = ({ activeFilter }: MapProps) => {
   }, [activeFilter, stationsData]);
 
   return (
-    <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
+    <div className="absolute inset-0 w-full h-full">
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-10">
-          <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full"></div>
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-75 z-50">
+          <div className="animate-spin h-8 w-8 border-4 border-white border-t-transparent rounded-full"></div>
         </div>
       )}
       
       {error && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-10">
-          <div className="text-center p-4">
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-75 z-50">
+          <div className="text-center p-4 bg-white rounded-lg mx-4">
             <p className="text-destructive font-medium">{error}</p>
             <p className="text-sm text-gray-500 mt-2">Please check your Mapbox token configuration.</p>
           </div>
         </div>
       )}
       
-      <div ref={mapContainer} className="absolute inset-0" />
+      <div ref={mapContainer} className="absolute inset-0 w-full h-full" />
     </div>
   );
 };
