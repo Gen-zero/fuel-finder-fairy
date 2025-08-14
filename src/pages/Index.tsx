@@ -53,19 +53,47 @@ const Index = () => {
   });
 
   const handleLocationSubmit = async (location: string) => {
+    if (!location.trim()) return;
+    
     toast({
       title: "Location update",
       description: `Searching for stations near ${location}`,
     });
     
     try {
-      // Use Kerala's approximate center coordinates
-      setCoordinates({ lat: 10.8505, lng: 76.2711 }); // Kerala's center coordinates
+      // Get Mapbox token from Supabase edge function
+      const { data: tokenData, error: tokenError } = await supabase.functions.invoke('get-mapbox-token');
+      
+      if (tokenError || !tokenData?.token) {
+        throw new Error('Unable to get Mapbox token');
+      }
+      
+      // Use Mapbox Geocoding API to convert location string to coordinates
+      const response = await fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(location)}.json?access_token=${tokenData.token}&country=IN&limit=1`
+      );
+      
+      if (!response.ok) {
+        throw new Error('Geocoding failed');
+      }
+      
+      const data = await response.json();
+      
+      if (data.features && data.features.length > 0) {
+        const [lng, lat] = data.features[0].center;
+        setCoordinates({ lat, lng });
+        toast({
+          title: "Location found",
+          description: `Searching for stations near ${data.features[0].place_name}`,
+        });
+      } else {
+        throw new Error('Location not found');
+      }
     } catch (error) {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Unable to find location",
+        description: "Unable to find location. Please try a different search term.",
       });
     }
   };
@@ -88,14 +116,39 @@ const Index = () => {
             description: "Searching for nearby stations...",
           });
         },
-        () => {
+        (error) => {
+          let errorMessage = "Unable to access your location";
+          
+          switch(error.code) {
+            case error.PERMISSION_DENIED:
+              errorMessage = "Location access denied. Please enable location permissions in your browser.";
+              break;
+            case error.POSITION_UNAVAILABLE:
+              errorMessage = "Location information unavailable.";
+              break;
+            case error.TIMEOUT:
+              errorMessage = "Location request timed out.";
+              break;
+          }
+          
           toast({
             variant: "destructive",
-            title: "Error",
-            description: "Unable to access your location",
+            title: "Location Error",
+            description: errorMessage,
           });
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 300000
         }
       );
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Geolocation not supported",
+        description: "Your browser doesn't support location services.",
+      });
     }
   };
 
